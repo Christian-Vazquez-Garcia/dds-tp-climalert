@@ -16,7 +16,6 @@ public class FetchClimateJob {
         this.climateManagerService = climateManagerService;
     }
 
-    // Ejecuta cada 5 minutos
     @Scheduled(cron = "0 */5 * * * *")
     public void fetchClimate() {
         LOGGER.info("Iniciando tarea programada: FetchClimateJob (cada 5 min)");

@@ -16,7 +16,6 @@ public class AnalyzeWarningJob {
         this.warningAnalyzerService = warningAnalyzerService;
     }
 
-    // Ejecuta cada 1 minuto
     @Scheduled(cron = "0 * * * * *")
     public void analyzeWarning() {
         LOGGER.info("Iniciando tarea programada: AnalyzeWarningJob (cada 1 min)");

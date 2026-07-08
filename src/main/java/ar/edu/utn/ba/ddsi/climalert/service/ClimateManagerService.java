@@ -40,13 +40,13 @@ public class ClimateManagerService {
             try {
                 data.setRawData(objectMapper.writeValueAsString(response));
             } catch (JsonProcessingException e) {
-                LOGGER.warn("Could not serialize raw response");
+                LOGGER.warn("No se pudo serializar la respuesta en bruto");
             }
             
             climateDataRepository.save(data);
-            LOGGER.info("Saved climate data for {}", data.getLocationName());
+            LOGGER.info("Datos climaticos guardados para {}", data.getLocationName());
         } else {
-            LOGGER.warn("Received empty or invalid response from Weather API");
+            LOGGER.warn("Respuesta vacia o invalida de Weather API");
         }
     }
 }

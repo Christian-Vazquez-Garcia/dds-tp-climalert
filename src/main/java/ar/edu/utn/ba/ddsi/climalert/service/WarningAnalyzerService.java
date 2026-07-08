@@ -38,19 +38,19 @@ public class WarningAnalyzerService {
         Optional<ClimateData> latestDataOpt = dataRepository.findTopByOrderByFetchTimeDesc();
 
         if (latestDataOpt.isEmpty()) {
-            LOGGER.info("No climate data available to analyze");
+            LOGGER.info("No hay datos climaticos disponibles para analizar");
             return;
         }
 
         ClimateData latestData = latestDataOpt.get();
 
         if (!rulesChecker.isWarningRequired(latestData)) {
-            LOGGER.info("Climate is normal: {}C, {}% humidity", latestData.getTemperature(), latestData.getHumidity());
+            LOGGER.info("El clima es normal: {}C, {}% humedad", latestData.getTemperature(), latestData.getHumidity());
             return;
         }
 
         if (warningRepository.existsByClimateDataId(latestData.getId())) {
-            LOGGER.info("A warning was already generated for data id {}", latestData.getId());
+            LOGGER.info("Ya se habia generado una alerta para el registro de datos id {}", latestData.getId());
             return;
         }
 
@@ -59,11 +59,9 @@ public class WarningAnalyzerService {
         
         warning = warningRepository.save(warning);
         
-        // Strategy usage
         notificationStrategy.notifyWarning(warning, latestData);
         
-        // Update with notification result
         warningRepository.save(warning);
-        LOGGER.warn("Created warning for data id {} with status {}", latestData.getId(), warning.getDeliveryStatus());
+        LOGGER.warn("Alerta creada para el registro de datos id {} con estado {}", latestData.getId(), warning.getDeliveryStatus());
     }
 }

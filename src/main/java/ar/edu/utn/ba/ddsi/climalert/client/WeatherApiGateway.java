@@ -30,12 +30,12 @@ public class WeatherApiGateway {
 
     public WeatherApiResponseDto fetchCurrentWeather() {
         String url = String.format("%s?key=%s&q=%s", apiUrl, apiKey, location);
-        LOGGER.info("Fetching weather from {}", url.replace(apiKey, "HIDDEN_KEY"));
+        LOGGER.info("Obteniendo clima desde {}", url.replace(apiKey, "HIDDEN_KEY"));
         
         try {
             return restTemplate.getForObject(url, WeatherApiResponseDto.class);
         } catch (Exception e) {
-            LOGGER.error("Error fetching weather data from API", e);
+            LOGGER.error("Error obteniendo datos del clima desde la API", e);
             return null;
         }
     }

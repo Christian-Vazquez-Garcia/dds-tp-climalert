@@ -32,7 +32,7 @@ public class EmailNotificationStrategy implements WarningNotificationStrategy {
     @Override
     public void notifyWarning(ClimateWarning warning, ClimateData data) {
         if (!enabled) {
-            LOGGER.warn("Email notifications are disabled. Would have sent to: {}", recipients);
+            LOGGER.warn("Notificaciones por email deshabilitadas. Se habria enviado a: {}", recipients);
             warning.setDeliveryStatus(DeliveryStatus.NOT_SENT);
             warning.setNotificationDetails("Notifications disabled");
             return;
@@ -57,10 +57,10 @@ public class EmailNotificationStrategy implements WarningNotificationStrategy {
 
             warning.setDeliveryStatus(DeliveryStatus.SENT);
             warning.setNotificationDetails("Email sent to " + recipients.size() + " recipients");
-            LOGGER.info("Warning email successfully sent");
+            LOGGER.info("Email de alerta enviado exitosamente");
 
         } catch (Exception e) {
-            LOGGER.error("Failed to send warning email", e);
+            LOGGER.error("Error al enviar el email de alerta", e);
             warning.setDeliveryStatus(DeliveryStatus.ERROR);
             warning.setNotificationDetails("Error sending email: " + e.getMessage());
         }
