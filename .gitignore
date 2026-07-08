@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+documents/
+
+# Ignorar variables de entorno reales (protege la API key)
+.env
